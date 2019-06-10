@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Name.css";
+import store from '../../store'
+import {UPDATE_NAME, UPDATE_CATEGORY} from '../../store'
 
 class Name extends Component {
   constructor(props) {
     super(props);
+    const reduxState = store.getState()
     this.state = {
-      name: '',
-      category: ''
+      name: reduxState.recipeName,
+      category: reduxState.recipeCategory
     };
   }
   handleNameChange(nameVal) {
@@ -22,7 +25,9 @@ class Name extends Component {
     });
   }
   saveChanges() {
-    // Send data to Redux state
+    const{category, name} = this.state
+    store.dispatch({type: UPDATE_NAME, payload: name})
+    store.dispatch({type: UPDATE_CATEGORY, payload: category})
   }
   render() {
     return (
