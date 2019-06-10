@@ -7,6 +7,8 @@ export const AUTHOR_LAST = "AUTHOR_LAST";
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const ADD_INSTRUCTIONS = "ADD_INSTRUCTIONS";
 export const CREATE_RECIPE = "CREATE_RECIPE";
+export const RESET = "RESET";
+
 
 const initialState = {
     recipeName:'',
@@ -36,7 +38,8 @@ function reducer (state = initialState, action){
             const recipe = {recipeName, recipeCategory, authorFirst, authorLast, ingredients, instructions}
             const newRecipes = [...state.recipes, recipe];
             return {...state, recipes: newRecipes};
-            
+        case RESET :   
+            return{...state, recipeName:'', recipeCategory:'', authorFirst: '', authorLast:'', ingredients: [], instructions: []}    
         default: return state
     }
 }
